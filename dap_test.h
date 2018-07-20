@@ -1,10 +1,10 @@
 #pragma once
-#include "assert.h"
-#include "stdbool.h"
-#include "stdlib.h"
-#include "stdio.h"
-#include "string.h"
+#include <assert.h>
+#include <stdbool.h>
+#include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <time.h>
 
 #define TEXT_COLOR_RED   "\x1B[31m"
 #define TEXT_COLOR_GRN   "\x1B[32m"
