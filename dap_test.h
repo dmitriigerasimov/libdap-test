@@ -15,8 +15,12 @@
 #define TEXT_COLOR_WHT   "\x1B[37m"
 #define TEXT_COLOR_RESET "\x1B[0m"
 
-#define dap_test_msg(msg) \
-    printf("\t%s%s%s\n", TEXT_COLOR_WHT, msg, TEXT_COLOR_RESET); \
+/* Can be used like debug info during write test*/
+#define dap_test_msg(...) \
+    printf("\t%s", TEXT_COLOR_WHT); \
+    printf(__VA_ARGS__); \
+    printf("%s\n", TEXT_COLOR_RESET);
+
 
 /* PIF - print if failed. For checking value in loop, for don't repeat output */
 #define dap_assert_PIF(expr, msg) \
@@ -25,12 +29,17 @@
     printf("\t%s%s FAILED!%s\n", TEXT_COLOR_RED, msg, TEXT_COLOR_RESET); \
     exit(-1); }
 
-#define dap_assert(expr, msg) \
+#define dap_assert(expr, testname) \
     if(expr) { \
-        printf("\t%s%s PASS.%s\n", TEXT_COLOR_GRN, msg, TEXT_COLOR_RESET); \
+        printf("\t%s%s PASS.%s\n", TEXT_COLOR_GRN, testname, TEXT_COLOR_RESET); \
     } else { \
-    printf("\t%s%s FAILED!%s\n", TEXT_COLOR_RED, msg, TEXT_COLOR_RESET); \
+    printf("\t%s%s FAILED!%s\n", TEXT_COLOR_RED, testname, TEXT_COLOR_RESET); \
     exit(-1); }\
+
+#define dap_pass_msg(testname) \
+    printf("\t%s%s PASS.%s\n", TEXT_COLOR_GRN, testname, TEXT_COLOR_RESET); \
 
 #define dap_print_module_name(module_name) \
    printf("%s%s passing the tests... %s\n", TEXT_COLOR_CYN, module_name, TEXT_COLOR_RESET);
+
+void dap_dump_hex(const void* data, size_t size);
